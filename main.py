@@ -7,6 +7,11 @@ import pandas as pd
 # Your API definition
 app = Flask(__name__, static_url_path="", static_folder="static", template_folder="templates")
 
+with open("word_vectorizer.pkl", "rb") as vec:
+    word_vectorizer = pickle.load(vec)
+
+with open("toxic_clf.pkl", "rb") as m_toxic:
+    toxic_clf = pickle.load(m_toxic)
 
 @app.route("/")
 def hello():
@@ -16,11 +21,6 @@ def hello():
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    with open("word_vectorizer.pkl", "rb") as vec:
-        word_vectorizer = pickle.load(vec)
-    
-    with open("toxic_clf.pkl", "rb") as m_toxic:
-        toxic_clf = pickle.load(m_toxic)
 
     if word_vectorizer and toxic_clf:
         try:
