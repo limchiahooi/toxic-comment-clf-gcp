@@ -9,4 +9,4 @@ Examples of toxic comments in the dataset:
 - "Mine dispeared, somebody wax my ass."
 - "You are a raging faggot. Kill yourself."
 
-URL: https://toxic-comment-clf-gcp.appspot.com/
+URL: https://toxic-comment-gcp.appspot.com/
