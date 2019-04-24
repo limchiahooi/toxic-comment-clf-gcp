@@ -4,14 +4,22 @@ import pickle
 import traceback
 import pandas as pd
 
+word_vectorizer = None
+toxic_clf = None
+
 # Your API definition
 app = Flask(__name__, static_url_path="", static_folder="static", template_folder="templates")
 
-with open("word_vectorizer.pkl", "rb") as vec:
-    word_vectorizer = pickle.load(vec)
+@app.before_first_request
+def _load_model():
+    global word_vectorizer
+    global toxic_clf 
 
-with open("toxic_clf.pkl", "rb") as m_toxic:
-    toxic_clf = pickle.load(m_toxic)
+    with open("word_vectorizer.pkl", "rb") as vec:
+        word_vectorizer = pickle.load(vec)
+
+    with open("toxic_clf.pkl", "rb") as m_toxic:
+        toxic_clf = pickle.load(m_toxic)
 
 @app.route("/")
 def hello():
